@@ -9,6 +9,7 @@ const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
+var punycode = require("punycode/");
 
 //Initialisations
 var app = express();
