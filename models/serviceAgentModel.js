@@ -23,6 +23,9 @@ const serviceAgentSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    image: {
+      type: String,
+    },
   },
   { collection: "serviceAgent_mst" }
 );

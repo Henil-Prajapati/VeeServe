@@ -30,7 +30,7 @@
         <div class="cards">
           <div class="card-double">
             <div>
-              <form action="/addServiceAgent" method="post">
+              <form action="/addServiceAgent" method="post" enctype="multipart/form-data">
                 <table id="add-a-service">
                   <tr>
                     <td>
@@ -68,6 +68,14 @@
                     </td>
                     <td>
                       <input type="password" id="first-name" name="password" required>
+                    </td>
+                  </tr>
+                    <tr>
+                      <td>
+                        <label class="service">Image</label>
+                      </td>
+                    <td>
+                      <input type="file" name="image" accept="image/*">
                     </td>
                   </tr>
                 </table>

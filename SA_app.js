@@ -25,8 +25,8 @@ app.use(
 );
 
 const accountSid = "AC04d25b18d449c7bf302c51353eaddb20";
-const authToken = "7a4f7e448c1190be93636e5d2510851d";
-const twilioNumber = "+13613664153";
+const authToken = "a30c5b7b1effe32cde29349f9f87bba4";
+const twilioNumber = "+14582175133";
 
 const twilio = require("twilio")(accountSid, authToken);
 var otp = 0;
@@ -165,10 +165,7 @@ app.get("/earnings", function (req, res) {
 
 app.get("/change-pass", function (req, res) {
   if (req.session.isLoggedIn) {
-    res.send(
-      "<h1>Coming Soon</h1>" +
-        "<p>The Change Password page is currently under construction. Please check back later.</p>"
-    );
+    res.render("change-password");
   } else {
     res.redirect("/");
   }
@@ -278,6 +275,42 @@ app.post("/startService/otpVerification/:bookingId", async (req, res) => {
       success: false,
       message: "Error occurred while updating booking status",
     });
+  }
+});
+
+app.post("/change-password", async (req, res) => {
+  if (!req.session.isLoggedIn) {
+    return res.redirect("/");
+  }
+
+  const { oldPassword, newPassword, confirmNewPassword } = req.body;
+
+  if (newPassword !== confirmNewPassword) {
+    return res.send("New passwords do not match.");
+  }
+
+  try {
+    const serviceAgent = await serviceAgent.findById(
+      req.session.serviceAgentId
+    );
+
+    if (!serviceAgent) {
+      return res.send("User not found.");
+    }
+
+    // Check if the old password is correct
+    if (serviceAgent.password !== oldPassword) {
+      return res.send("Old password is incorrect.");
+    }
+
+    // Update the password
+    serviceAgent.password = newPassword;
+    await serviceAgent.save();
+
+    res.send("Password changed successfully.");
+  } catch (error) {
+    console.error(error);
+    res.send("An error occurred while changing the password.");
   }
 });
 

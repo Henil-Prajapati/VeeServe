@@ -7,7 +7,14 @@ const moment = require("moment");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const faceapi = require("face-api.js");
+const canvas = require("canvas");
 var punycode = require("punycode/");
+const { detectFace } = require("./faceRecognition");
+const tf = require("@tensorflow/tfjs-node");
+
+// Set the backend to CPU
+console.log("Current TF.js backend:", tf.getBackend());
 
 //Variables for storing data
 const currentDate = moment();
@@ -57,7 +64,17 @@ var status = 0;
 //Multer Setup
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/images/services");
+    // Determine the destination folder based on some condition, e.g., user role
+    let uploadFolder = "public/images/";
+
+    // You can adjust this logic based on your application's requirements
+    if (req.path.includes("/addServiceAgent")) {
+      uploadFolder += "service_provider";
+    } else {
+      uploadFolder += "services";
+    }
+
+    cb(null, uploadFolder);
   },
   filename: function (req, file, cb) {
     cb(
@@ -428,6 +445,16 @@ app.delete("/deleteCity/:id", async function (req, res) {
   }
 });
 
+app.get("/charts", function (req, res) {
+  if (req.session.isLoggedIn) {
+    res.render("admin_charts", {
+      fullName: fullName,
+    });
+  } else {
+    res.redirect("/");
+  }
+});
+
 app.get("/cities", function (req, res) {
   if (req.session.isLoggedIn) {
     cities
@@ -646,28 +673,35 @@ app.post("/addCity", function (req, res) {
     });
 });
 
-app.post("/addServiceAgent", function (req, res) {
-  const { category, name, userName, password } = req.body;
-  console.log(category, name);
+app.post("/addServiceAgent", (req, res) => {
+  upload(req, res, async (err) => {
+    if (err) {
+      return res.status(500).send({ message: err.message });
+    }
 
-  // Create a new subCategory document
-  const newServiceAgent = new serviceAgent({
-    name: name,
-    serviceCategory: category,
-    userName: userName,
-    password: password,
-  });
+    // Check if file is uploaded
+    if (!req.file) {
+      return res.status(400).send("Please upload an image.");
+    }
 
-  // Save the new subCategory document to the database
-  newServiceAgent
-    .save()
-    .then(function (newServiceAgent) {
-      res.redirect("/serviceAgents");
-    })
-    .catch(function (error) {
-      console.error("Error saving subCategory:", error);
-      res.status(500).send("Error: could not add subCategory.");
+    const { category, name, userName, password } = req.body;
+    const newServiceAgent = new serviceAgent({
+      name,
+      serviceCategory: category,
+      userName,
+      password,
+      // Assuming you want to store the image path
+      imagePath: req.file.path,
     });
+
+    newServiceAgent
+      .save()
+      .then(() => res.redirect("/serviceAgents"))
+      .catch((error) => {
+        console.error("Error saving service agent:", error);
+        res.status(500).send("Error saving service agent.");
+      });
+  });
 });
 
 //Server Setup
