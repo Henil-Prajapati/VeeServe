@@ -68,6 +68,13 @@ Install Dependencies
 
 **For the backend (root directory):**
 
+cd admin_module
+npm install
+
+cd customer_module
+npm install
+
+cd serviceAgent_module
 npm install
 
 **Database Configuration**
