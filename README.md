@@ -10,26 +10,26 @@ Welcome to VeeServe, a robust service provider management system inspired by pla
 **Customer**
 
 **Home Page**
-<img width="1470" alt="image" src="https://github.com/Megh-Shah-2901/VeeServe/assets/86917130/21fe424a-c56c-4d16-9a56-c85dae3b8a74">
+<img width="1470" alt="image" src="https://github.com/Henil-Prajapati/VeeServe/assets/86917130/21fe424a-c56c-4d16-9a56-c85dae3b8a74">
 
 **Login Page**
-<img width="1470" alt="image" src="https://github.com/Megh-Shah-2901/VeeServe/assets/86917130/bb95e20b-6f70-49ba-9c5b-9f85ff3aaa42">
+<img width="1470" alt="image" src="https://github.com/Henil-Prajapati/VeeServe/assets/86917130/bb95e20b-6f70-49ba-9c5b-9f85ff3aaa42">
 
 **Cart Page**
-<img width="1470" alt="image" src="https://github.com/Megh-Shah-2901/VeeServe/assets/86917130/2d54b978-4c58-4a13-9d73-7c5c3e6f512d">
+<img width="1470" alt="image" src="https://github.com/Henil-Prajapati/VeeServe/assets/86917130/2d54b978-4c58-4a13-9d73-7c5c3e6f512d">
 
 **Admin**
 
 **Login Page**
-<img width="1470" alt="image" src="https://github.com/Megh-Shah-2901/VeeServe/assets/86917130/fe312053-eba7-4689-b899-498ebeb5eb26">
+<img width="1470" alt="image" src="https://github.com/Henil-Prajapati/VeeServe/assets/86917130/fe312053-eba7-4689-b899-498ebeb5eb26">
 
 **Home Page**
-<img width="1470" alt="image" src="https://github.com/Megh-Shah-2901/VeeServe/assets/86917130/1919f692-8411-48e9-8dd4-2dd2b22ba02c">
+<img width="1470" alt="image" src="https://github.com/Henil-Prajapati/VeeServe/assets/86917130/1919f692-8411-48e9-8dd4-2dd2b22ba02c">
 
 **Service Agent**
 
 **Home Page**
-<img width="1470" alt="image" src="https://github.com/Megh-Shah-2901/VeeServe/assets/86917130/90f7fb35-25b3-4129-a46f-da1ed3ab497c">
+<img width="1470" alt="image" src="https://github.com/Henil-Prajapati/VeeServe/assets/86917130/90f7fb35-25b3-4129-a46f-da1ed3ab497c">
 
 
 **Overview:**
@@ -60,7 +60,7 @@ To get started with VeeServe on your local machine, follow these steps:
 
 **Clone the Repository**
 
-git clone https://github.com/Megh-Shah-2901/VeeServe.git
+git clone https://github.com/Henil-Prajapati/VeeServe.git
 
 cd VeeServe
 
